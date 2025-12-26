@@ -7,10 +7,6 @@ numpy>=1.23.0
 # Machine Learning
 scikit-learn>=1.2.0
 
-# Optional: Advanced Models
-xgboost>=1.7.0
-lightgbm>=3.3.0
-
 # Optional: Class Imbalance Handling
 imbalanced-learn>=0.10.0
 
