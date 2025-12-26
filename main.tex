@@ -1,0 +1,695 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\geometry{margin=2.5cm}
+
+\title{\textbf{TEAM PLAN AND WORK DISTRIBUTION}\\
+\large Student Depression Analysis Project}
+\author{P4DS Course - University Data Science Program}
+\date{December 8-22, 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Team Member Information}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Student ID} & \textbf{Full Name} & \textbf{Primary Responsibility}         \\
+        \hline
+        23122006            & Lưu Thượng Hồng    & Machine Learning \& Academic Analysis   \\
+        \hline
+        23122020            & Nguyễn Thiên Ấn    & Data Preprocessing \& Pressure Analysis \\
+        \hline
+        23122034            & Lê Nguyên Khang    & Data Exploration \& Lifestyle Analysis  \\
+        \hline
+    \end{tabular}
+    \caption{Team Member Roles}
+\end{table}
+
+\section{Work Breakdown by Member}
+
+\subsection{Lê Nguyên Khang (23122034) - 33.3\%}
+
+\textbf{Primary Tasks:}
+\begin{itemize}
+    \item Initial data exploration and quality assessment
+    \item Correlation analysis and statistical summaries
+    \item Research Questions RQ1-RQ3 (Lifestyle Factors)
+    \item Notebook: \texttt{01\_exploration.ipynb}
+    \item Notebook: \texttt{02\_lifestyle.ipynb}
+\end{itemize}
+
+\textbf{Detailed Contributions:}
+\begin{enumerate}
+    \item \textbf{Data Exploration (Week 1: Dec 8-10)}
+          \begin{itemize}
+              \item Load and inspect dataset (27,901 records)
+              \item Generate descriptive statistics for all features
+              \item Create distribution plots for numerical variables
+              \item Analyze categorical variable frequencies
+              \item Check for missing values and duplicates
+              \item Document initial findings in exploration notebook
+          \end{itemize}
+
+    \item \textbf{Correlation Analysis (Week 1: Dec 11-12)}
+          \begin{itemize}
+              \item Compute Pearson correlation matrix
+              \item Create correlation heatmap visualization
+              \item Identify relationships with Depression target
+              \item Document surprising findings (CGPA correlation)
+          \end{itemize}
+
+    \item \textbf{RQ1: Sleep Paradox Analysis (Week 1: Dec 13-14)}
+          \begin{itemize}
+              \item Analyze depression rates across sleep duration groups
+              \item Perform Chi-square test ($\chi^2$ = 9.07, p = 0.0026)
+              \item Investigate reverse causation hypothesis
+              \item Create visualizations comparing sleep groups
+              \item Document findings: 7-8h (60.67\%) vs 5-6h (58.72\%)
+          \end{itemize}
+
+    \item \textbf{RQ2: Diet Compensation Effect (Week 2: Dec 15-17)}
+          \begin{itemize}
+              \item Conduct Kruskal-Wallis H-tests for each sleep group
+              \item Analyze interaction between diet and sleep
+              \item Calculate reduction percentages:
+                    \begin{itemize}
+                        \item <5h: 75.96\% $\rightarrow$ 50.38\% (25.58pp reduction)
+                        \item 5-6h: 66.67\% $\rightarrow$ 48.28\% (18.39pp reduction)
+                        \item >8h: 53.77\% $\rightarrow$ 36.64\% (17.13pp reduction)
+                    \end{itemize}
+              \item Create heatmap of Sleep $\times$ Diet interaction
+          \end{itemize}
+
+    \item \textbf{RQ3: Optimal Sweet Spot (Week 2: Dec 18-19)}
+          \begin{itemize}
+              \item Perform Mann-Whitney U test comparing best vs worst
+              \item Calculate ROI for intervention pathways
+              \item Document sweet spot: >8h + Healthy (36.64\%)
+              \item Create intervention pathway visualizations
+          \end{itemize}
+
+    \item \textbf{Documentation \& Visualization (Week 2: Dec 20-21)}
+          \begin{itemize}
+              \item Polish all visualizations in lifestyle notebook
+              \item Write comprehensive markdown explanations
+              \item Ensure reproducibility of all analyses
+              \item Contribute to final presentation slides
+          \end{itemize}
+\end{enumerate}
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item \texttt{notebooks/01\_exploration.ipynb} - Complete EDA
+    \item \texttt{notebooks/02\_lifestyle.ipynb} - RQ1-RQ3 analysis
+    \item Statistical test results for lifestyle factors
+    \item Visualizations: histograms, heatmaps, bar plots
+\end{itemize}
+
+\subsection{Nguyễn Thiên Ấn (23122020) - 33.3\%}
+
+\textbf{Primary Tasks:}
+\begin{itemize}
+    \item Data cleaning and preprocessing pipeline
+    \item Research Questions RQ4-RQ6 (Pressure Analysis)
+    \item Notebook: \texttt{preprocessing.ipynb}
+    \item Notebook: \texttt{03\_pressure.ipynb}
+    \item Source: \texttt{src/preprocessing.py}
+\end{itemize}
+
+\textbf{Detailed Contributions:}
+\begin{enumerate}
+    \item \textbf{Data Preprocessing (Week 1: Dec 8-10)}
+          \begin{itemize}
+              \item Clean Sleep Duration field (remove single quotes)
+              \item Drop ID column
+              \item Implement ordinal encoding:
+                    \begin{itemize}
+                        \item Sleep Duration: 1-4 scale
+                        \item Dietary Habits: 1-3 scale (Unhealthy to Healthy)
+                    \end{itemize}
+              \item Implement binary encoding:
+                    \begin{itemize}
+                        \item Suicidal Thoughts: Yes=1, No=0
+                        \item Family History: Yes=1, No=0
+                        \item Gender: Male=0, Female=1
+                    \end{itemize}
+              \item Create \texttt{preprocessing.py} module (252 lines)
+              \item Write unit tests for encoding functions
+          \end{itemize}
+
+    \item \textbf{Preprocessing Pipeline Integration (Week 1: Dec 11-12)}
+          \begin{itemize}
+              \item Develop \texttt{preprocess\_pipeline()} entry point
+              \item Create helper functions for data quality checks
+              \item Implement \texttt{get\_missing\_values\_summary()}
+              \item Implement \texttt{get\_duplicates\_count()}
+              \item Document preprocessing notebook with examples
+          \end{itemize}
+
+    \item \textbf{RQ4: Cumulative Pressure Analysis (Week 1: Dec 13-15)}
+          \begin{itemize}
+              \item Build logistic regression model for suicidal thoughts
+              \item Analyze three pressure types:
+                    \begin{itemize}
+                        \item Academic Pressure: $\beta$=0.377, OR=1.46, p<0.001
+                        \item Financial Stress: $\beta$=0.270, OR=1.31, p<0.001
+                        \item Work Pressure: $\beta$=0.189, OR=1.21, p=0.499 (NS)
+                    \end{itemize}
+              \item Test for exponential vs additive effects
+              \item Create total pressure score variable
+              \item Visualize pressure effect curves
+          \end{itemize}
+
+    \item \textbf{RQ5: Satisfaction as Protective Factor (Week 2: Dec 16-18)}
+          \begin{itemize}
+              \item Stratify data by Family History status
+              \item Analyze Study Satisfaction levels (1-5)
+              \item Create point plots with 95\% confidence intervals
+              \item Document findings:
+                    \begin{itemize}
+                        \item Low satisfaction: 13pp gap between groups
+                        \item High satisfaction: 2pp gap (not significant)
+                    \end{itemize}
+              \item Interpret protective factor mechanism
+          \end{itemize}
+
+    \item \textbf{RQ6: Danger Threshold Identification (Week 2: Dec 19-20)}
+          \begin{itemize}
+              \item Build predictive logistic model
+              \item Calculate probability curves
+              \item Identify 50\% threshold: Academic Pressure = 1.57
+              \item Develop 3-tier intervention system:
+                    \begin{itemize}
+                        \item Green zone: 1.0-1.5 (<50\% risk)
+                        \item Yellow zone: 1.6-3.0 (50-65\% risk)
+                        \item Red zone: 3.1-5.0 (>65\% risk)
+                    \end{itemize}
+              \item Create threshold visualization
+          \end{itemize}
+
+    \item \textbf{Code Integration \& Testing (Week 2: Dec 21-22)}
+          \begin{itemize}
+              \item Integrate preprocessing into main pipeline
+              \item Test end-to-end data flow
+              \item Ensure compatibility with feature engineering
+              \item Code review and refactoring
+              \item Write inline documentation
+          \end{itemize}
+\end{enumerate}
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item \texttt{src/preprocessing.py} - Complete preprocessing module
+    \item \texttt{notebooks/preprocessing.ipynb} - Preprocessing demonstrations
+    \item \texttt{notebooks/03\_pressure.ipynb} - RQ4-RQ6 analysis
+    \item Logistic regression models with coefficients
+    \item Threshold identification system
+\end{itemize}
+
+\subsection{Lưu Thượng Hồng (23122006) - 33.4\%}
+
+\textbf{Primary Tasks:}
+\begin{itemize}
+    \item Machine learning model development
+    \item Research Questions RQ7-RQ10 (Academic \& Work Analysis)
+    \item Notebook: \texttt{04\_work.ipynb}
+    \item Notebook: \texttt{modeling.ipynb}
+    \item Source: \texttt{src/features.py}, \texttt{src/models.py}, \texttt{src/run\_pipeline.py}
+\end{itemize}
+
+\textbf{Detailed Contributions:}
+\begin{enumerate}
+    \item \textbf{Feature Engineering Development (Week 1: Dec 8-10)}
+          \begin{itemize}
+              \item Create age grouping function (6 brackets)
+              \item Create CGPA grouping function (6 categories)
+              \item Create satisfaction level groups (3 levels)
+              \item Create pressure level groups (3 levels)
+              \item Create work/study hours groups (4 brackets)
+              \item Implement interaction term: AP $\times$ SS
+              \item Develop achievement-satisfaction composite (5 categories)
+              \item Create high achiever flag (CGPA $\geq$ 8.0)
+              \item Write \texttt{features.py} module (181 lines)
+          \end{itemize}
+
+    \item \textbf{RQ7: Academic Factors Impact (Week 1: Dec 11-12)}
+          \begin{itemize}
+              \item Build logistic regression with CGPA and Hours
+              \item Calculate correlations with Depression:
+                    \begin{itemize}
+                        \item Work/Study Hours: r=0.21, OR=1.38, p<0.001
+                        \item CGPA: r=0.02, p>0.05 (not significant)
+                    \end{itemize}
+              \item Document "grades don't predict depression" finding
+              \item Create scatter plots with regression lines
+          \end{itemize}
+
+    \item \textbf{RQ8: High-Risk Degree Programs (Week 1: Dec 13-14)}
+          \begin{itemize}
+              \item Calculate depression rates by degree (28 types)
+              \item Identify highest risk: Class 12 (70.8\%, n=6,080)
+              \item Perform statistical comparisons vs average (58.5\%)
+              \item Investigate reasons for Class 12 risk:
+                    \begin{itemize}
+                        \item High-stakes university entrance exams
+                        \item Intense peer competition
+                        \item Parental expectation pressure
+                        \item Developmental vulnerability (age 17-18)
+                    \end{itemize}
+              \item Create bar plot of depression by degree
+          \end{itemize}
+
+    \item \textbf{RQ9: Safe Threshold Analysis (Week 1: Dec 15-16)}
+          \begin{itemize}
+              \item Build predictive model for work/study hours
+              \item Calculate probability curves
+              \item Identify 50\% threshold: 4 hours/day
+              \item Document depression rates by hour brackets:
+                    \begin{itemize}
+                        \item 0-3h: 50\%
+                        \item 4-6h: 55\%
+                        \item 7-9h: 62\%
+                        \item 10-12h: 73\%
+                    \end{itemize}
+              \item Recommend safe zone: <4 hours/day
+          \end{itemize}
+
+    \item \textbf{RQ10: Achievement-Satisfaction Paradox (Week 2: Dec 17-18)}
+          \begin{itemize}
+              \item Create stratified analysis by CGPA and Satisfaction
+              \item Calculate depression rates for 4 groups:
+                    \begin{itemize}
+                        \item Burnout (High CGPA + Low Sat): 67.4\%
+                        \item At-Risk (Low CGPA + Low Sat): 67.6\%
+                        \item Resilient (Low CGPA + High Sat): 52.9\%
+                        \item Thriving (High CGPA + High Sat): 50.8\%
+                    \end{itemize}
+              \item Document 14.5pp advantage of satisfaction
+              \item Create heatmap visualization
+              \item Analyze "satisfaction trumps achievement" insight
+          \end{itemize}
+
+    \item \textbf{Machine Learning Pipeline (Week 2: Dec 19-20)}
+          \begin{itemize}
+              \item Implement 4 models:
+                    \begin{itemize}
+                        \item Logistic Regression (with scaling)
+                        \item Random Forest (100 trees)
+                        \item Gradient Boosting (100 estimators)
+                        \item Decision Tree (max\_depth=5)
+                    \end{itemize}
+              \item Develop stratified 80-20 split
+              \item Implement StandardScaler for LR
+              \item Create evaluation framework (Accuracy, AUC, F1, Precision, Recall)
+              \item Extract feature importance from tree models
+              \item Write \texttt{models.py} module (251 lines)
+          \end{itemize}
+
+    \item \textbf{Model Evaluation \& Comparison (Week 2: Dec 21)}
+          \begin{itemize}
+              \item Train all 4 models
+              \item Compare performance metrics
+              \item Identify best model: Gradient Boosting (AUC=0.9245)
+              \item Analyze feature importance rankings:
+                    \begin{enumerate}
+                        \item Suicidal Thoughts: 0.352
+                        \item Academic Pressure: 0.198
+                        \item Financial Stress: 0.156
+                        \item Work/Study Hours: 0.089
+                        \item Sleep Duration: 0.067
+                    \end{enumerate}
+              \item Validate RQ findings through feature importance
+              \item Create model comparison visualizations
+          \end{itemize}
+
+    \item \textbf{Pipeline Integration \& Automation (Week 2: Dec 22)}
+          \begin{itemize}
+              \item Develop \texttt{run\_pipeline.py} (47 lines)
+              \item Configure parameters: SMOTE, CV, test size
+              \item Implement automated result saving
+              \item Generate 3 output files:
+                    \begin{itemize}
+                        \item \texttt{model\_comparison.csv}
+                        \item \texttt{feature\_importance.csv}
+                        \item \texttt{processed\_data.csv}
+                    \end{itemize}
+              \item Test end-to-end pipeline execution
+              \item Document usage in README
+          \end{itemize}
+\end{enumerate}
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item \texttt{src/features.py} - Feature engineering module
+    \item \texttt{src/models.py} - ML modeling module
+    \item \texttt{src/run\_pipeline.py} - Main execution script
+    \item \texttt{notebooks/04\_work.ipynb} - RQ7-RQ10 analysis
+    \item \texttt{notebooks/modeling.ipynb} - Model development
+    \item \texttt{results/} - All output CSV files
+    \item Performance comparison tables
+\end{itemize}
+
+\section{Collaboration Process}
+
+\subsection{Communication Channels}
+\begin{itemize}
+    \item \textbf{Version Control:} Git/GitHub for code collaboration
+    \item \textbf{Meetings:} Twice weekly (Mon/Thu) via Zoom/in-person
+    \item \textbf{Messaging:} Daily updates via group chat
+    \item \textbf{Documentation:} Shared Google Drive for reports
+\end{itemize}
+
+\subsection{Workflow Management}
+\begin{enumerate}
+    \item \textbf{Week 1 (Dec 8-14): Individual Development}
+          \begin{itemize}
+              \item Each member focuses on primary responsibilities
+              \item Daily stand-ups: progress updates, blockers, next steps
+              \item Code commits to individual feature branches
+              \item Peer review of completed notebooks
+          \end{itemize}
+
+    \item \textbf{Week 2 (Dec 15-21): Integration \& Refinement}
+          \begin{itemize}
+              \item Merge feature branches to main
+              \item Resolve integration issues collectively
+              \item Cross-review each other's work
+              \item Ensure consistent coding style and documentation
+              \item Test complete pipeline end-to-end
+          \end{itemize}
+
+    \item \textbf{Final Day (Dec 22): Finalization}
+          \begin{itemize}
+              \item Final code review and cleanup
+              \item Complete README documentation
+              \item Prepare presentation slides
+              \item Practice presentation delivery
+              \item Submit final deliverables
+          \end{itemize}
+\end{enumerate}
+
+\subsection{Quality Assurance}
+\begin{itemize}
+    \item \textbf{Code Review:} All code reviewed by at least one other member
+    \item \textbf{Testing:} Each module tested independently before integration
+    \item \textbf{Documentation:} Inline comments and markdown explanations required
+    \item \textbf{Reproducibility:} All analyses must run from scratch successfully
+    \item \textbf{Style Guide:} Follow PEP 8 for Python code
+\end{itemize}
+
+\subsection{Shared Responsibilities}
+While each member has primary tasks, the following are shared:
+\begin{itemize}
+    \item README.md completion (all contribute sections)
+    \item Final presentation creation (collaborative slides)
+    \item Data quality checks (all verify dataset integrity)
+    \item Result interpretation (discuss findings together)
+    \item Report writing (divide sections, peer edit)
+\end{itemize}
+
+\section{Project Planning and Timeline}
+
+\subsection{Week 1: December 8-14, 2025}
+
+\begin{longtable}{|p{2cm}|p{4cm}|p{4cm}|p{4cm}|}
+    \hline
+    \textbf{Date}                                        & \textbf{Khang (23122034)} & \textbf{An (23122020)} & \textbf{Hong (23122006)} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Date}                                        & \textbf{Khang (23122034)} & \textbf{An (23122020)} & \textbf{Hong (23122006)} \\
+    \hline
+    \endhead
+
+    \textbf{Dec 8 (Sun)}                                 &
+    Load dataset, basic inspection                       &
+    Clean Sleep Duration, drop ID column                 &
+    Create age/CGPA grouping functions                                                                                                   \\
+    \hline
+
+    \textbf{Dec 9 (Mon)}                                 &
+    Generate descriptive statistics, distribution plots  &
+    Implement ordinal encoding (Sleep, Diet)             &
+    Create satisfaction/pressure groups                                                                                                  \\
+    \hline
+
+    \textbf{Dec 10 (Tue)}                                &
+    Analyze categorical variables, check quality         &
+    Implement binary encoding (Gender, Suicidal, Family) &
+    Implement interaction terms                                                                                                          \\
+    \hline
+
+    \textbf{Dec 11 (Wed)}                                &
+    Compute correlation matrix                           &
+    Develop preprocess\_pipeline() function              &
+    Start RQ7: CGPA vs Hours analysis                                                                                                    \\
+    \hline
+
+    \textbf{Dec 12 (Thu)}                                &
+    Create correlation heatmap, identify surprises       &
+    Create data quality helper functions                 &
+    Complete RQ7: logistic regression                                                                                                    \\
+    \hline
+
+    \textbf{Dec 13 (Fri)}                                &
+    Start RQ1: Sleep paradox analysis                    &
+    Start RQ4: Build pressure model                      &
+    Start RQ8: Degree analysis                                                                                                           \\
+    \hline
+
+    \textbf{Dec 14 (Sat)}                                &
+    Complete RQ1: Chi-square test, visualizations        &
+    Continue RQ4: Analyze coefficients                   &
+    Complete RQ8: Class 12 findings                                                                                                      \\
+    \hline
+
+    \multicolumn{4}{|c|}{\cellcolor{yellow}\textbf{Milestone 1: EDA \& Preprocessing Complete}}                                          \\
+    \hline
+\end{longtable}
+
+\subsection{Week 2: December 15-22, 2025}
+
+\begin{longtable}{|p{2cm}|p{4cm}|p{4cm}|p{4cm}|}
+    \hline
+    \textbf{Date}                            & \textbf{Khang (23122034)} & \textbf{An (23122020)} & \textbf{Hong (23122006)} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Date}                            & \textbf{Khang (23122034)} & \textbf{An (23122020)} & \textbf{Hong (23122006)} \\
+    \hline
+    \endhead
+
+    \textbf{Dec 15 (Sun)}                    &
+    Start RQ2: Kruskal-Wallis tests          &
+    Complete RQ4: Total pressure analysis    &
+    Start RQ9: Hours threshold                                                                                               \\
+    \hline
+
+    \textbf{Dec 16 (Mon)}                    &
+    Continue RQ2: Diet $\times$ Sleep interaction   &
+    Start RQ5: Satisfaction stratification   &
+    Complete RQ9: Probability curves                                                                                         \\
+    \hline
+
+    \textbf{Dec 17 (Tue)}                    &
+    Complete RQ2: Reduction calculations     &
+    Continue RQ5: Point plots with CI        &
+    Start RQ10: Achievement-Sat groups                                                                                       \\
+    \hline
+
+    \textbf{Dec 18 (Wed)}                    &
+    Start RQ3: ROI calculations              &
+    Complete RQ5: Protective factor analysis &
+    Complete RQ10: Paradox documentation                                                                                     \\
+    \hline
+
+    \textbf{Dec 19 (Thu)}                    &
+    Complete RQ3: Sweet spot identification  &
+    Start RQ6: Threshold model               &
+    Start ML: Implement 4 models                                                                                             \\
+    \hline
+
+    \textbf{Dec 20 (Fri)}                    &
+    Polish visualizations, markdown          &
+    Complete RQ6: 3-tier system              &
+    Train models, extract importance                                                                                         \\
+    \hline
+
+    \textbf{Dec 21 (Sat)}                    &
+    Contribute to README, slides             &
+    Integrate preprocessing, code review     &
+    Complete modeling notebook, comparison                                                                                   \\
+    \hline
+
+    \textbf{Dec 22 (Sun)}                    &
+    Final presentation prep                  &
+    Final testing                            &
+    Pipeline automation, finalize                                                                                            \\
+    \hline
+
+    \multicolumn{4}{|c|}{\cellcolor{green}\textbf{Milestone 2: Complete Project Delivery}}                                   \\
+    \hline
+\end{longtable}
+
+\subsection{Key Milestones}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{8cm}|l|}
+        \hline
+        \textbf{Milestone}                                   & \textbf{Deliverables} & \textbf{Date} \\
+        \hline
+        M1: EDA Complete                                     &
+        \texttt{01\_exploration.ipynb}, correlation analysis &
+        Dec 14                                                                                       \\
+        \hline
+        M2: Preprocessing Done                               &
+        \texttt{preprocessing.py}, cleaned dataset           &
+        Dec 14                                                                                       \\
+        \hline
+        M3: RQ1-RQ3 Complete                                 &
+        \texttt{02\_lifestyle.ipynb}, statistical tests      &
+        Dec 19                                                                                       \\
+        \hline
+        M4: RQ4-RQ6 Complete                                 &
+        \texttt{03\_pressure.ipynb}, logistic models         &
+        Dec 20                                                                                       \\
+        \hline
+        M5: RQ7-RQ10 Complete                                &
+        \texttt{04\_work.ipynb}, feature engineering         &
+        Dec 20                                                                                       \\
+        \hline
+        M6: ML Models Ready                                  &
+        \texttt{modeling.ipynb}, \texttt{models.py}, results &
+        Dec 21                                                                                       \\
+        \hline
+        M7: Pipeline Integrated                              &
+        \texttt{run\_pipeline.py}, end-to-end testing        &
+        Dec 22                                                                                       \\
+        \hline
+        M8: Documentation Complete                           &
+        README.md, presentation slides                       &
+        Dec 22                                                                                       \\
+        \hline
+        \textbf{Final Submission}                            &
+        All code, notebooks, results, presentation           &
+        \textbf{Dec 22}                                                                              \\
+        \hline
+    \end{tabular}
+    \caption{Project Milestones and Deadlines}
+\end{table}
+
+\section{Risk Management}
+
+\subsection{Potential Risks and Mitigation}
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{|p{4cm}|p{3cm}|p{6cm}|}
+        \hline
+        \textbf{Risk}               & \textbf{Probability} & \textbf{Mitigation Strategy} \\
+        \hline
+        Integration conflicts       & Medium               &
+        Daily commits, clear interfaces, integration testing on Dec 15                    \\
+        \hline
+        Time overrun on RQ analysis & Medium               &
+        Buffer time in Week 2, prioritize core RQs (1,4,7,10)                             \\
+        \hline
+        Statistical test complexity & Low-Medium           &
+        Use statsmodels/scipy libraries, consult documentation, peer review               \\
+        \hline
+        Model performance issues    & Low                  &
+        Try multiple algorithms, tune hyperparameters, use cross-validation               \\
+        \hline
+        Code bugs in pipeline       & Medium               &
+        Unit testing, code review, end-to-end testing Dec 22                              \\
+        \hline
+        Member unavailability       & Low                  &
+        Cross-training on tasks, documentation of progress daily                          \\
+        \hline
+    \end{tabular}
+    \caption{Risk Assessment and Mitigation}
+\end{table}
+
+\section{Expected Outcomes}
+
+By December 22, 2025, the team will deliver:
+
+\begin{enumerate}
+    \item \textbf{Codebase}
+          \begin{itemize}
+              \item 4 Python modules: \texttt{preprocessing.py}, \texttt{features.py}, \texttt{models.py}, \texttt{run\_pipeline.py}
+              \item 6 Jupyter notebooks with complete analyses
+              \item Clean, documented, PEP 8 compliant code
+              \item Git repository with commit history
+          \end{itemize}
+
+    \item \textbf{Analysis Results}
+          \begin{itemize}
+              \item Answers to all 10 research questions with statistical evidence
+              \item Model comparison: 4 algorithms evaluated
+              \item Feature importance rankings
+              \item 3 CSV result files in \texttt{results/} directory
+          \end{itemize}
+
+    \item \textbf{Documentation}
+          \begin{itemize}
+              \item Comprehensive README.md (430 lines)
+              \item Inline code comments and docstrings
+              \item Markdown explanations in all notebooks
+              \item This team plan document
+          \end{itemize}
+
+    \item \textbf{Presentation}
+          \begin{itemize}
+              \item 15-20 minute presentation slides
+              \item Key findings and visualizations
+              \item Live demo of pipeline execution
+              \item Q\&A preparation
+          \end{itemize}
+\end{enumerate}
+
+\section{Team Commitment}
+
+All team members commit to:
+\begin{itemize}
+    \item Attend all scheduled meetings
+    \item Complete assigned tasks on time
+    \item Communicate proactively about challenges
+    \item Support teammates when needed
+    \item Maintain high code and analysis quality
+    \item Contribute equally to final deliverables
+\end{itemize}
+
+\vspace{1cm}
+
+\noindent\textbf{Signatures:}
+
+\vspace{1cm}
+
+\noindent\rule{4cm}{0.4pt} \hfill \rule{4cm}{0.4pt} \hfill \rule{4cm}{0.4pt}
+
+\noindent Lê Nguyên Khang \hfill Nguyễn Thiên Ấn \hfill Lưu Thượng Hồng
+
+\noindent 23122034 \hfill 23122020 \hfill 23122006
+
+\vspace{0.5cm}
+
+\noindent Date: December 8, 2025
+
+\end{document}
