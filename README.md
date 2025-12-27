@@ -1,5 +1,7 @@
 # Phân Tích Trầm Cảm Ở Sinh Viên
 
+Đường dẫn đến repository: [Student Depression Analysis](https://github.com/p1neapplechoco/StudentDepression)
+
 ## Tổng Quan Dự Án
 
 Dự án này phân tích các yếu tố góp phần gây ra trầm cảm ở sinh viên sử dụng các phương pháp thống kê và học máy. Phân tích điều tra 10 câu hỏi nghiên cứu (RQ) xoay quanh ba chủ đề chính: Lối sống, Áp lực Tâm lý, và Các biến số Học tập & Công việc.
